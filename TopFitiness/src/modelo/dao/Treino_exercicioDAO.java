@@ -34,17 +34,18 @@ public class Treino_exercicioDAO {
             stmt.setString(5, te.getRepeticao());
             stmt.setString(6, te.getDivisao());
             
-            
             stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso!");
-            
+              
         } catch (SQLException ex) {
             Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao Adcionar Exercicio"+ex);
         }finally{
+ 
             Conexao.closeConnection(con, stmt);
         }
+        
+        JOptionPane.showMessageDialog(null, "Adicionado com Sucesso!");
+        
     }
     
     public List<Treino_exercicio> readA(){

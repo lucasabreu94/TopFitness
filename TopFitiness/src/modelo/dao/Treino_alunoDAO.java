@@ -34,7 +34,6 @@ public class Treino_alunoDAO {
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso!");
             
         } catch (SQLException ex) {
             Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,6 +41,7 @@ public class Treino_alunoDAO {
         }finally{
             Conexao.closeConnection(con, stmt);
         }
+        
     }
     
     public List<Treino_aluno> readA(){
