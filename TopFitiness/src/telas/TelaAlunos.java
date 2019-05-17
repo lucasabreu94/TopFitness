@@ -67,10 +67,10 @@ public class TelaAlunos extends javax.swing.JInternalFrame {
         jTxtIdAluno = new javax.swing.JTextField();
         jTxtNome = new javax.swing.JTextField();
 
+        setBorder(null);
         setClosable(true);
-        setIconifiable(true);
         setMaximizable(true);
-        setResizable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/telas/Icone.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(853, 624));
 
         jTblAlunos.setModel(new javax.swing.table.DefaultTableModel(
@@ -119,7 +119,7 @@ public class TelaAlunos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -138,7 +138,7 @@ public class TelaAlunos extends javax.swing.JInternalFrame {
                     .addComponent(jTxtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

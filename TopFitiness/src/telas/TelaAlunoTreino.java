@@ -589,7 +589,7 @@ public class TelaAlunoTreino extends javax.swing.JFrame {
                     t.setRepeticao(ta.getRepeticao());
                     t.setDivisao(ta.getDivisao());
                     
-                    dao.create(t);              
+                    dao.copy(t);              
                 }
         }
         readJTbl();

@@ -64,11 +64,13 @@ public class TelaExercicio extends javax.swing.JInternalFrame {
         jTblExercicios = new javax.swing.JTable();
         jBtnCadasrar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 153, 153));
+        setBorder(null);
         setClosable(true);
-        setIconifiable(true);
+        setForeground(java.awt.Color.gray);
         setMaximizable(true);
-        setResizable(true);
-        setPreferredSize(new java.awt.Dimension(853, 624));
+        setTitle("Exercicios");
+        setPreferredSize(new java.awt.Dimension(835, 640));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -202,7 +204,7 @@ public class TelaExercicio extends javax.swing.JInternalFrame {
                             .addComponent(jBtnCadasrar)
                             .addComponent(jBtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(233, Short.MAX_VALUE))
+                        .addContainerGap(359, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 

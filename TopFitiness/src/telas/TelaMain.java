@@ -6,6 +6,7 @@
 package telas;
 
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +37,10 @@ public class TelaMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jDesktop = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jDesktop = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -51,26 +54,71 @@ public class TelaMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Top Fitness");
+        setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
-        setPreferredSize(new java.awt.Dimension(1024, 686));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(1024, 720));
         setSize(new java.awt.Dimension(0, 0));
 
-        jDesktop.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Logo_TopFitness.png"))); // NOI18N
+
+        jDesktop.setBackground(new java.awt.Color(153, 153, 153));
         jDesktop.setForeground(new java.awt.Color(153, 153, 153));
+        jDesktop.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jDesktop.setDesktopManager(null);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 847, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jDesktop.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopLayout = new javax.swing.GroupLayout(jDesktop);
         jDesktop.setLayout(jDesktopLayout);
         jDesktopLayout.setHorizontalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 624, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo1.png"))); // NOI18N
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(8, 8, 8)
+                .addComponent(jDesktop)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 539, Short.MAX_VALUE))
+                    .addComponent(jDesktop))
+                .addContainerGap())
+        );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
+        jMenuBar1.setFont(jMenuBar1.getFont());
 
         jMenu.setText("Exercicios");
 
@@ -122,21 +170,11 @@ public class TelaMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -146,13 +184,31 @@ public class TelaMain extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         TelaExercicio exercicio = new TelaExercicio();
         exercicio.setVisible(true);
+        //chama a janela no Painel Desktop
         jDesktop.add(exercicio);
+        
+        try {   
+            exercicio.setSelected(true);   
+            //diz que a janela interna é maximizável   
+            exercicio.setMaximizable(true);   
+            //set o tamanho máximo dela, que depende da janela pai   
+            exercicio.setMaximum(true);   
+        } catch (java.beans.PropertyVetoException e) {} 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         TelaTreinos treino = new TelaTreinos();
         treino.setVisible(true);
+        //chama a janela no Painel Desktop
         jDesktop.add(treino);
+        
+        try {   
+            treino.setSelected(true);   
+            //diz que a janela interna é maximizável   
+            treino.setMaximizable(true);   
+            //set o tamanho máximo dela, que depende da janela pai   
+            treino.setMaximum(true);   
+        } catch (java.beans.PropertyVetoException e) {} 
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -164,7 +220,17 @@ public class TelaMain extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         TelaAlunos aluno = new TelaAlunos();
         aluno.setVisible(true);
+        //chama a janela no Painel Desktop
         jDesktop.add(aluno);
+        
+        try {   
+            aluno.setSelected(true);   
+            //diz que a janela interna é maximizável   
+            aluno.setMaximizable(true);   
+            //set o tamanho máximo dela, que depende da janela pai   
+            aluno.setMaximum(true);   
+        } catch (java.beans.PropertyVetoException e) {} 
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
@@ -220,5 +286,7 @@ public class TelaMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

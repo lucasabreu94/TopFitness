@@ -34,6 +34,7 @@ public class Treino_alunoDAO {
             
             stmt.executeUpdate();
             
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso!");
             
         } catch (SQLException ex) {
             Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,6 +350,34 @@ public class Treino_alunoDAO {
         return treino_exercicios;
         
     }
+    
+    public void copy(Treino_aluno ta){
+        
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("INSERT INTO tb_treino_aluno (fk_id_aluno, fk_id_exercicio, exercicio, serie, repeticao, divisao) VALUES (?,?,?,?,?,?)");
+            stmt.setInt(1, ta.getFk_id_aluno());
+            stmt.setInt(2, ta.getFk_id_exercicio());
+            stmt.setString(3, ta.getExercicio());
+            stmt.setString(4, ta.getSerie());
+            stmt.setString(5, ta.getRepeticao());
+            stmt.setString(6, ta.getDivisao());
+            
+            
+            stmt.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Adcionar Exercicio"+ex);
+        }finally{
+            Conexao.closeConnection(con, stmt);
+        }
+        
+    }
+    
     
     public void delete(Treino_aluno ta){
         
