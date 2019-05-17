@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/modelo/dao/Treino_exercicioDAO.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/Conexao/Conexao.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/modelo/bean/Treino_aluno.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/modelo/dao/TreinoDAO.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/modelo/dao/Treino_alunoDAO.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaAlunoTreino.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaLogin.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaMain.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaTreinos.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaExercicio.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaAlunos.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/TopFitness/TopFitiness/src/telas/TelaCadastroTreino.java</file>
         </group>
     </open-files>
 </project-private>
