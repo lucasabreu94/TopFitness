@@ -75,6 +75,43 @@ public class ExercicioDAO {
         
     }
     
+    public List<Exercicio> search(String nome){
+        
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Exercicio> exercicios = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM tb_exercicio WHERE nome LIKE ?");
+            stmt.setString(1, "%"+nome+"%");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                Exercicio exercicio = new Exercicio();
+                
+                exercicio.setId(rs.getInt("id"));
+                exercicio.setNome(rs.getString("nome"));
+                exercicio.setDescricao(rs.getString("descricao"));
+                exercicio.setCategoria(rs.getString("categoria"));
+               
+                exercicios.add(exercicio);
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        
+        return exercicios;
+        
+    }
+    
     public void update(Exercicio e){
         
         Connection con = Conexao.getConnection();
