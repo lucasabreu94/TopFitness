@@ -59,4 +59,42 @@ public class AlunoDAO {
         
     }
     
+    public List<Aluno> search(String nome){
+        
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Aluno> alunos = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT id, nome, sexo, nasc, objetivo FROM tb_aluno WHERE nome LIKE ?");
+            stmt.setString(1, "%"+nome+"%");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                Aluno aluno = new Aluno();
+                
+                aluno.setId(rs.getInt("id"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setSexo(rs.getString("sexo"));
+                aluno.setDatanasc(rs.getDate("nasc").toString());
+                aluno.setObjetivo(rs.getString("objetivo"));
+                
+                alunos.add(aluno);
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        
+        return alunos;
+        
+    }
+    
 }

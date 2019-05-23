@@ -27,15 +27,41 @@ public class TelaMain extends javax.swing.JFrame {
     public TelaMain() {
         initComponents();        
         setIcon();
-        
-        DefaultTableModel modelo = (DefaultTableModel) jTbAluno.getModel();
-        jTbAluno.setRowSorter(new TableRowSorter(modelo));
-        
-        readJTbAluno();
-
-        
+   
     }
 
+    public void readJTblAlunos(){
+        DefaultTableModel modelo = (DefaultTableModel) jTbAluno.getModel();
+        modelo.setNumRows(0);
+        AlunoDAO adao = new AlunoDAO();
+        
+        for(Aluno a: adao.read()){     
+            modelo.addRow(new Object[]{
+            a.getId(),
+            a.getNome(),
+            a.getSexo(),
+            a.getDatanasc(),
+            a.getObjetivo()
+            });
+        }
+    }
+    
+    public void searchJTblAlunos(String nome){
+        DefaultTableModel modelo = (DefaultTableModel) jTbAluno.getModel();
+        modelo.setNumRows(0);
+        AlunoDAO adao = new AlunoDAO();
+        
+        for(Aluno a: adao.search(nome)){     
+            modelo.addRow(new Object[]{
+            a.getId(),
+            a.getNome(),
+            a.getSexo(),
+            a.getDatanasc(),
+            a.getObjetivo()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,8 +80,9 @@ public class TelaMain extends javax.swing.JFrame {
         jBtnExercicios = new javax.swing.JButton();
         btnTreinos = new javax.swing.JButton();
         btnTreinoAluno = new javax.swing.JButton();
-        txtIdAluno = new javax.swing.JTextField();
-        txtNomeAluno = new javax.swing.JTextField();
+        jTxtIdAluno = new javax.swing.JTextField();
+        jTxtNomeAluno = new javax.swing.JTextField();
+        jBtnConsultar = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -99,10 +126,7 @@ public class TelaMain extends javax.swing.JFrame {
 
         jTbAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Sexo", "Data de Nascimento", "Objetivo"
@@ -116,12 +140,19 @@ public class TelaMain extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTbAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbAlunoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbAluno);
         jTbAluno.getAccessibleContext().setAccessibleName("jTbAluno");
 
         jBtnExercicios.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnExercicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/activity.png"))); // NOI18N
-        jBtnExercicios.setText(" Exercícios");
+        jBtnExercicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Dumbbell 32x.png"))); // NOI18N
+        jBtnExercicios.setText("EXERCÍCIOS");
+        jBtnExercicios.setToolTipText("Exercícios");
+        jBtnExercicios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBtnExercicios.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBtnExercicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,8 +161,10 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         btnTreinos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnTreinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cards.png"))); // NOI18N
-        btnTreinos.setText("Treino Padrão");
+        btnTreinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bench_press_32px.png"))); // NOI18N
+        btnTreinos.setText("TREINOS");
+        btnTreinos.setToolTipText("Treinos Padrões");
+        btnTreinos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTreinos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTreinosActionPerformed(evt);
@@ -139,8 +172,26 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         btnTreinoAluno.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnTreinoAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/person.png"))); // NOI18N
-        btnTreinoAluno.setText("Editar Treino Aluno");
+        btnTreinoAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/athletics_32px.png"))); // NOI18N
+        btnTreinoAluno.setToolTipText("Editar Treino do Aluno");
+        btnTreinoAluno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTreinoAluno.setLabel("TREINO \nALUNO ");
+
+        jTxtIdAluno.setEditable(false);
+        jTxtIdAluno.setEnabled(false);
+        jTxtIdAluno.setOpaque(false);
+
+        jTxtNomeAluno.setToolTipText("Digite nome do aluno");
+
+        jBtnConsultar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBtnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search_32px.png"))); // NOI18N
+        jBtnConsultar.setText("CONSULTAR");
+        jBtnConsultar.setToolTipText("Consultar aluno");
+        jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,45 +201,51 @@ public class TelaMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBtnExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTreinoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 167, Short.MAX_VALUE)))
-                .addGap(14, 14, 14))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTreinoAluno)
+                            .addComponent(jBtnExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTxtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnConsultar)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTreinoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(jBtnConsultar)
+                    .addComponent(jTxtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnTreinoAluno)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnExercicios)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
         jMenuBar1.setFont(jMenuBar1.getFont());
 
+        jMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Dumbbell 16x.png"))); // NOI18N
         jMenu.setText("Exercicios");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Dumbbell 16x.png"))); // NOI18N
         jMenuItem1.setText("Exercicios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,21 +307,7 @@ public class TelaMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void readJTbAluno(){
-        DefaultTableModel modelo = (DefaultTableModel) jTbAluno.getModel();
-        modelo.setNumRows(0);
-        AlunoDAO adao = new AlunoDAO();
-        
-        for(Aluno a: adao.read()){     
-            modelo.addRow(new Object[]{
-                a.getId(),
-                a.getNome(),
-                a.getSexo(),
-                a.getDatanasc(),
-                a.getObjetivo()
-            });
-        }
-    }
+
     
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         TelaExercicios exercicios = new TelaExercicios();
@@ -321,6 +364,31 @@ public class TelaMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBtnExerciciosActionPerformed
 
+    private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
+        if (jTxtNomeAluno.getText() != ""){
+            searchJTblAlunos(jTxtNomeAluno.getText());
+            jTxtIdAluno.setText("");
+        } else{
+            readJTblAlunos();
+            jTxtIdAluno.setText("");
+        }
+    }//GEN-LAST:event_jBtnConsultarActionPerformed
+
+    private void jTbAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbAlunoMouseClicked
+        int linha = jTbAluno.getSelectedRow();
+
+        /* Verifica se não foi clicado em uma tabela vazia */
+        if (linha > -1) {
+            /* Captura o modelo da tabela */
+            DefaultTableModel modelo = (DefaultTableModel) jTbAluno.getModel();
+
+            /* Copia os dados do registro selecionado para os campos texto */
+            jTxtIdAluno.setText(modelo.getValueAt(linha, 0).toString());
+            jTxtNomeAluno.setText(modelo.getValueAt(linha, 1).toString());
+
+        }
+    }//GEN-LAST:event_jTbAlunoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -365,6 +433,7 @@ public class TelaMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTreinoAluno;
     private javax.swing.JButton btnTreinos;
+    private javax.swing.JToggleButton jBtnConsultar;
     private javax.swing.JButton jBtnExercicios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu;
@@ -380,7 +449,7 @@ public class TelaMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTbAluno;
-    private javax.swing.JTextField txtIdAluno;
-    private javax.swing.JTextField txtNomeAluno;
+    private javax.swing.JTextField jTxtIdAluno;
+    private javax.swing.JTextField jTxtNomeAluno;
     // End of variables declaration//GEN-END:variables
 }

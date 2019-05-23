@@ -6,6 +6,8 @@
 package telas;
 
 import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.bean.Exercicio;
 import modelo.dao.ExercicioDAO;
@@ -97,8 +99,9 @@ public class TelaCadastroExercicios extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTAreaDescricao);
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/save.png"))); // NOI18N
-        jBtnSalvar.setText("Salvar");
+        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/save_32px.png"))); // NOI18N
+        jBtnSalvar.setText("SALVAR");
+        jBtnSalvar.setToolTipText("Salvar cadastro de exercício");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSalvarActionPerformed(evt);
@@ -106,9 +109,9 @@ public class TelaCadastroExercicios extends javax.swing.JFrame {
         });
 
         jBtnSair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/exit.png"))); // NOI18N
-        jBtnSair.setText("Sair");
-        jBtnSair.setToolTipText("");
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/close_window_32px.png"))); // NOI18N
+        jBtnSair.setText("SAIR");
+        jBtnSair.setToolTipText("Fechar cadastro de exercícios");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
@@ -212,7 +215,9 @@ public class TelaCadastroExercicios extends javax.swing.JFrame {
         
         }
         else{
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+             
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!","TopFitness - Alerta",JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }
         
     }//GEN-LAST:event_jBtnSalvarActionPerformed

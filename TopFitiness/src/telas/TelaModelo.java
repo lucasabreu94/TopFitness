@@ -56,7 +56,7 @@ public class TelaModelo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(java.awt.Color.darkGray);
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo 64.png"))); // NOI18N
 

@@ -98,7 +98,6 @@ public class TelaExercicios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Exercícios");
         setModalExclusionType(null);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(0, 0));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -111,8 +110,8 @@ public class TelaExercicios extends javax.swing.JFrame {
         });
 
         jBtnConsulta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search.png"))); // NOI18N
-        jBtnConsulta.setText("Consultar");
+        jBtnConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search_32px.png"))); // NOI18N
+        jBtnConsulta.setText("CONSULTAR");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnConsultaActionPerformed(evt);
@@ -138,30 +137,27 @@ public class TelaExercicios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTblExercicios);
 
-        jBtnNovo.setBackground(new java.awt.Color(0, 0, 0));
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/add.png"))); // NOI18N
-        jBtnNovo.setText("Novo");
+        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/add_32px.png"))); // NOI18N
+        jBtnNovo.setText("NOVO");
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoActionPerformed(evt);
             }
         });
 
-        jBtnEditar.setBackground(new java.awt.Color(0, 0, 0));
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/edit.png"))); // NOI18N
-        jBtnEditar.setText("Editar");
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/edit_32px.png"))); // NOI18N
+        jBtnEditar.setText("EDITAR");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
             }
         });
 
-        jBtnSair.setBackground(new java.awt.Color(0, 0, 0));
         jBtnSair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/exit.png"))); // NOI18N
-        jBtnSair.setText("Sair");
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/close_window_32px.png"))); // NOI18N
+        jBtnSair.setText("SAIR");
         jBtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSairActionPerformed(evt);
@@ -220,7 +216,7 @@ public class TelaExercicios extends javax.swing.JFrame {
                     .addComponent(jBtnConsulta)
                     .addComponent(jTxtExercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNovo)
