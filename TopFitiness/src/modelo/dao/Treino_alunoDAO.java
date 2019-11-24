@@ -56,7 +56,7 @@ public class Treino_alunoDAO {
         List<Treino_aluno> treino_alunos = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM tb_treino_aluno WHERE divisao = 'A'");
+            stmt = con.prepareStatement("SELECT * FROM tb_treino_aluno WHERE divisao = 'A'");            
             rs = stmt.executeQuery();
             
             
@@ -398,6 +398,31 @@ public class Treino_alunoDAO {
         }finally{
             Conexao.closeConnection(con, stmt);
         }
+    }
+    
+    public void deleteAll(Treino_aluno ta){
+        
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM tb_treino_aluno WHERE fk_id_aluno = ?");  
+            stmt.setInt(1, ta.getFk_id_aluno());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Exercicios Removidos com Sucesso!");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Exercicio"+ex);
+        }finally{
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public Iterable<Treino_aluno> readA(int idAluno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

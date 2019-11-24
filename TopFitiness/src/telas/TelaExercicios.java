@@ -18,6 +18,16 @@ import modelo.dao.ExercicioDAO;
  */
 public class TelaExercicios extends javax.swing.JFrame {
 
+    static String idExercicio;
+    static String nomeExercicio;
+    static String descExercicio;
+    static String catExercicio;
+    static boolean preecamp;
+    private String idExer;
+    private String nomeExer;
+    private String descExer;
+    private String cateExer;
+    
     /**
      * Creates new form TelaExercicios
      */
@@ -25,11 +35,13 @@ public class TelaExercicios extends javax.swing.JFrame {
         initComponents();
         setIcon();
         
+        readJTblExercicios();
+        
         this.setFocusableWindowState(true);
         
         DefaultTableModel modelo = (DefaultTableModel) jTblExercicios.getModel();
         jTblExercicios.setRowSorter(new TableRowSorter(modelo));
-  
+        
             
     }
     
@@ -135,6 +147,11 @@ public class TelaExercicios extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTblExercicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblExerciciosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblExercicios);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -216,7 +233,7 @@ public class TelaExercicios extends javax.swing.JFrame {
                     .addComponent(jBtnConsulta)
                     .addComponent(jTxtExercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNovo)
@@ -268,9 +285,40 @@ public class TelaExercicios extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        TelaManutencaoExercicios ManuExercicios = new TelaManutencaoExercicios();
-        ManuExercicios.setVisible(true);
+                
+        if(jTblExercicios.getSelectedRow() != -1){
+            // TODO add your handling code here:
+            idExercicio = idExer;
+            nomeExercicio = nomeExer;
+            descExercicio = descExer; 
+            catExercicio = cateExer; 
+            preecamp = true;
+            
+            TelaManutencaoExercicio ManuExercicios = new TelaManutencaoExercicio();
+            ManuExercicios.setVisible(true);
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Exercicio que deseje editar.");
+        }
     }//GEN-LAST:event_jBtnEditarActionPerformed
+
+    private void jTblExerciciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblExerciciosMouseClicked
+
+        int linha = jTblExercicios.getSelectedRow();
+        
+        if (linha > -1) {
+            /* Captura o modelo da tabela */
+            DefaultTableModel modelo = (DefaultTableModel) jTblExercicios.getModel();
+            
+            /* Copia os dados do registro selecionado para os campos texto */
+            idExer = modelo.getValueAt(linha, 0).toString();
+            nomeExer = modelo.getValueAt(linha, 1).toString();
+            descExer = modelo.getValueAt(linha, 2).toString();
+            cateExer = modelo.getValueAt(linha, 3).toString();
+
+        }
+        
+    }//GEN-LAST:event_jTblExerciciosMouseClicked
 
     /**
      * @param args the command line arguments

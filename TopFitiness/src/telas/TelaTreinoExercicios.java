@@ -1,0 +1,725 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package telas;
+
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.bean.Exercicio;
+import modelo.bean.Treino;
+import modelo.bean.Treino_exercicio;
+import modelo.dao.ExercicioDAO;
+import modelo.dao.TreinoDAO;
+import modelo.dao.Treino_exercicioDAO;
+
+
+/**
+ *
+ * @author user
+ */
+public class TelaTreinoExercicios extends javax.swing.JFrame {
+
+    /**
+     * Creates new form TelaExercicios
+     */
+    public TelaTreinoExercicios() {
+        initComponents();
+        setIcon();
+        
+        ExercicioDAO edao = new ExercicioDAO();
+        TreinoDAO tdao = new TreinoDAO();
+        
+        for (Exercicio e: edao.read()){
+            jCbEx.addItem(e);
+        }
+        
+        TelaCadTreino tcadtreino = new TelaCadTreino();
+        
+        if(tcadtreino.preecamp == true){
+            jTxtTreino.setText(tcadtreino.nomeTreino);
+        }
+        
+        tcadtreino.preecamp=false;
+        
+        readJTbl();
+        
+    }
+    
+    public void readJTbl(){
+        
+        
+        DefaultTableModel tabelaA = (DefaultTableModel) jTblA.getModel();
+        tabelaA.setNumRows(0);
+        DefaultTableModel tabelaB = (DefaultTableModel) jTblB.getModel();
+        tabelaB.setNumRows(0);
+        DefaultTableModel tabelaC = (DefaultTableModel) jTblC.getModel();
+        tabelaC.setNumRows(0);
+        DefaultTableModel tabelaD = (DefaultTableModel) jTblD.getModel();
+        tabelaD.setNumRows(0);
+        DefaultTableModel tabelaE = (DefaultTableModel) jTblE.getModel();
+        tabelaE.setNumRows(0);
+        DefaultTableModel tabelaF = (DefaultTableModel) jTblF.getModel();
+        tabelaF.setNumRows(0);
+          
+        Exercicio e = new Exercicio();
+        
+        
+        
+        Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+        TelaCadTreino tcadtreino = new TelaCadTreino();
+        
+        
+        for(Treino_exercicio te: tedao.readA()){ 
+
+ 
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    
+                    tabelaA.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+            
+        }
+        
+        for(Treino_exercicio te: tedao.readB()){  
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    tabelaB.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+        }
+        
+        for(Treino_exercicio te: tedao.readC()){  
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    tabelaC.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+        }
+        
+        for(Treino_exercicio te: tedao.readD()){  
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    tabelaD.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+        }
+        
+        for(Treino_exercicio te: tedao.readE()){  
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    tabelaE.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+        }
+        
+        for(Treino_exercicio te: tedao.readF()){  
+                if(tcadtreino.idTreino == te.getFk_id_treinos()){
+                    tabelaF.addRow(new Object[]{
+                        te.getId(),
+                        te.getExercicio(),
+                        te.getSerie(),
+                        te.getRepeticao(),
+                        te.getDivisao()
+                    });
+                }
+        }
+        
+    }
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedA = new javax.swing.JTabbedPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTblA = new javax.swing.JTable();
+        jTabbedB = new javax.swing.JTabbedPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTblB = new javax.swing.JTable();
+        jTabbedC = new javax.swing.JTabbedPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTblC = new javax.swing.JTable();
+        jTabbedD = new javax.swing.JTabbedPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTblD = new javax.swing.JTable();
+        jTabbedE = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTblE = new javax.swing.JTable();
+        jTabbedF = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblF = new javax.swing.JTable();
+        jTxtSerie = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jBtnAdicionar = new javax.swing.JButton();
+        jBtnRemover = new javax.swing.JButton();
+        jCbEx = new javax.swing.JComboBox<>();
+        jTxtRepeticao = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jCbDivisao = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jBtnSair = new javax.swing.JButton();
+        jBtnLimpar = new javax.swing.JButton();
+        jTxtTreino = new javax.swing.JTextField();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Manutenção Treino");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+        setSize(new java.awt.Dimension(0, 0));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo 64.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jTblA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblAMouseClicked(evt);
+            }
+        });
+        jTblA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTblAKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTblA);
+
+        jTabbedA.addTab("A", jScrollPane3);
+
+        jTabbedPane1.addTab("A", jTabbedA);
+
+        jTblB.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTblB);
+
+        jTabbedB.addTab("B", jScrollPane4);
+
+        jTabbedPane1.addTab("B", jTabbedB);
+
+        jTblC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTblC);
+
+        jTabbedC.addTab("C", jScrollPane5);
+
+        jTabbedPane1.addTab("C", jTabbedC);
+
+        jTblD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTblD);
+
+        jTabbedD.addTab("D", jScrollPane6);
+
+        jTabbedPane1.addTab("D", jTabbedD);
+
+        jTblE.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTblE);
+
+        jTabbedE.addTab("E", jScrollPane1);
+
+        jTabbedPane1.addTab("E", jTabbedE);
+
+        jTblF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Exercicio", "Series", "Repetição", "Divisão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTblF);
+
+        jTabbedF.addTab("F", jScrollPane2);
+
+        jTabbedPane1.addTab("F", jTabbedF);
+
+        jLabel5.setText("Treino");
+
+        jBtnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/add_32px.png"))); // NOI18N
+        jBtnAdicionar.setText("ADICIONAR");
+        jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAdicionarActionPerformed(evt);
+            }
+        });
+
+        jBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/waste_32px.png"))); // NOI18N
+        jBtnRemover.setText("REMOVER");
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
+            }
+        });
+
+        jCbEx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONAR" }));
+
+        jLabel2.setText("Exercicio");
+
+        jLabel3.setText("Series");
+
+        jLabel4.setText("Repetição");
+
+        jCbDivisao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "A", "B", "C", "D", "E", "F", " " }));
+
+        jLabel6.setText("Divisão");
+
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/close_window_32px.png"))); // NOI18N
+        jBtnSair.setText("SAIR");
+        jBtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSairActionPerformed(evt);
+            }
+        });
+
+        jBtnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/broom_32px.png"))); // NOI18N
+        jBtnLimpar.setText("LIMPAR");
+        jBtnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLimparActionPerformed(evt);
+            }
+        });
+
+        jTxtTreino.setEditable(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCbEx, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTxtRepeticao, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTxtSerie, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCbDivisao, javax.swing.GroupLayout.Alignment.LEADING, 0, 69, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBtnAdicionar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnRemover)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnSair)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtTreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCbEx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTxtRepeticao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCbDivisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAdicionar)
+                    .addComponent(jBtnRemover)
+                    .addComponent(jBtnSair)
+                    .addComponent(jBtnLimpar))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTblAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblAMouseClicked
+
+    }//GEN-LAST:event_jTblAMouseClicked
+
+    private void jTblAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTblAKeyReleased
+
+    }//GEN-LAST:event_jTblAKeyReleased
+
+    private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
+        Treino_exercicio te = new Treino_exercicio();
+        Treino_exercicioDAO dao = new Treino_exercicioDAO();
+        TelaCadTreino tcadtreino = new TelaCadTreino();
+
+        Exercicio exercicio = (Exercicio) jCbEx.getSelectedItem();
+
+        te.setFk_id_treinos(tcadtreino.idTreino);
+        te.setFk_id_exercicio(exercicio.getId());
+        te.setExercicio(exercicio.getNome());
+        te.setSerie(jTxtSerie.getText());
+        te.setRepeticao(jTxtRepeticao.getText());
+        te.setDivisao((String) jCbDivisao.getSelectedItem());
+
+        dao.create(te);
+
+        jTxtSerie.setText("");
+        jTxtRepeticao.setText("");
+        jCbEx.setSelectedItem("SELECIONAR");
+        jCbDivisao.setSelectedItem(" ");
+
+        readJTbl();
+
+    }//GEN-LAST:event_jBtnAdicionarActionPerformed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        if(jTblA.getSelectedRow() != -1){
+
+            Treino_exercicio te = new Treino_exercicio();
+            Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+            te.setId((int)jTblA.getValueAt(jTblA.getSelectedRow(), 0));
+            tedao.delete(te);
+
+            readJTbl();
+        }else{
+            if(jTblB.getSelectedRow() != -1){
+
+                Treino_exercicio te = new Treino_exercicio();
+                Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+                te.setId((int)jTblB.getValueAt(jTblB.getSelectedRow(), 0));
+                tedao.delete(te);
+
+                readJTbl();
+            }else{
+                if(jTblC.getSelectedRow() != -1){
+
+                    Treino_exercicio te = new Treino_exercicio();
+                    Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+                    te.setId((int)jTblC.getValueAt(jTblC.getSelectedRow(), 0));
+                    tedao.delete(te);
+
+                    readJTbl();
+                }else{
+                    if(jTblD.getSelectedRow() != -1){
+
+                        Treino_exercicio te = new Treino_exercicio();
+                        Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+                        te.setId((int)jTblD.getValueAt(jTblD.getSelectedRow(), 0));
+                        tedao.delete(te);
+
+                        readJTbl();
+                    }else{
+                        if(jTblE.getSelectedRow() != -1){
+
+                            Treino_exercicio te = new Treino_exercicio();
+                            Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+                            te.setId((int)jTblE.getValueAt(jTblE.getSelectedRow(), 0));
+                            tedao.delete(te);
+
+                            readJTbl();
+                        }else{
+                            if(jTblF.getSelectedRow() != -1){
+
+                                Treino_exercicio te = new Treino_exercicio();
+                                Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+                                te.setId((int)jTblF.getValueAt(jTblF.getSelectedRow(), 0));
+                                tedao.delete(te);
+
+                                readJTbl();
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Selecione um item para remover.");
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
+
+    private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_jBtnSairActionPerformed
+
+    private void jBtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimparActionPerformed
+        TelaCadTreino tcadtreino = new TelaCadTreino();
+        Treino_exercicio te = new Treino_exercicio();
+        Treino_exercicioDAO tedao = new Treino_exercicioDAO();
+
+        te.setFk_id_treinos(tcadtreino.idTreino);
+        tedao.deleteAll(te);
+
+        readJTbl();
+    }//GEN-LAST:event_jBtnLimparActionPerformed
+
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaTreinoExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaTreinoExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaTreinoExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaTreinoExercicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaTreinoExercicios().setVisible(true);
+            }
+        });
+    }
+    
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icone.png")));
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAdicionar;
+    private javax.swing.JButton jBtnLimpar;
+    private javax.swing.JButton jBtnRemover;
+    private javax.swing.JButton jBtnSair;
+    private javax.swing.JComboBox<String> jCbDivisao;
+    private javax.swing.JComboBox<Object> jCbEx;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTabbedPane jTabbedA;
+    private javax.swing.JTabbedPane jTabbedB;
+    private javax.swing.JTabbedPane jTabbedC;
+    private javax.swing.JTabbedPane jTabbedD;
+    private javax.swing.JTabbedPane jTabbedE;
+    private javax.swing.JTabbedPane jTabbedF;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTblA;
+    private javax.swing.JTable jTblB;
+    private javax.swing.JTable jTblC;
+    private javax.swing.JTable jTblD;
+    private javax.swing.JTable jTblE;
+    private javax.swing.JTable jTblF;
+    private javax.swing.JTextField jTxtRepeticao;
+    private javax.swing.JTextField jTxtSerie;
+    private javax.swing.JTextField jTxtTreino;
+    // End of variables declaration//GEN-END:variables
+}

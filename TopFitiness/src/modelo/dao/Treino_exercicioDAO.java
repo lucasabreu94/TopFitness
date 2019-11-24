@@ -320,4 +320,25 @@ public class Treino_exercicioDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+    
+    public void deleteAll(Treino_exercicio te){
+        
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM tb_treino_exercicios WHERE fk_id_treinos = ?");  
+            stmt.setInt(1, te.getFk_id_treinos());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Todos os Exercicios Foram Removidos com Sucesso!");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ExercicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Exercicio"+ex);
+        }finally{
+            Conexao.closeConnection(con, stmt);
+        }
+    }
 }

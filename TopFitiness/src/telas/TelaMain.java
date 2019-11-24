@@ -10,6 +10,7 @@ import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import modelo.bean.Aluno;
@@ -21,12 +22,18 @@ import modelo.dao.AlunoDAO;
  */
 public class TelaMain extends javax.swing.JFrame {
 
+    static int idAluno;
+    static String nome;
+    static boolean preecamp;
+
     /**
      * Creates new form ViewJMain
      */
     public TelaMain() {
         initComponents();        
         setIcon();
+        
+        readJTblAlunos();
    
     }
 
@@ -83,14 +90,15 @@ public class TelaMain extends javax.swing.JFrame {
         jTxtIdAluno = new javax.swing.JTextField();
         jTxtNomeAluno = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JToggleButton();
+        jBtnSair = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -172,10 +180,15 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         btnTreinoAluno.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnTreinoAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/athletics_32px.png"))); // NOI18N
+        btnTreinoAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/weightlifting_32px.png"))); // NOI18N
         btnTreinoAluno.setToolTipText("Editar Treino do Aluno");
         btnTreinoAluno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnTreinoAluno.setLabel("TREINO \nALUNO ");
+        btnTreinoAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTreinoAlunoActionPerformed(evt);
+            }
+        });
 
         jTxtIdAluno.setEditable(false);
         jTxtIdAluno.setEnabled(false);
@@ -193,6 +206,14 @@ public class TelaMain extends javax.swing.JFrame {
             }
         });
 
+        jBtnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/close_window_32px.png"))); // NOI18N
+        jBtnSair.setText("SAIR");
+        jBtnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -207,7 +228,8 @@ public class TelaMain extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTreinoAluno)
-                            .addComponent(jBtnExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBtnExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnSair))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTxtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +256,8 @@ public class TelaMain extends javax.swing.JFrame {
                         .addComponent(btnTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnExercicios)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnSair))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -256,9 +279,11 @@ public class TelaMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bench_press_16px.png"))); // NOI18N
         jMenu2.setText("Treinos");
 
-        jMenuItem3.setText("Novo Treino");
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bench_press_16px.png"))); // NOI18N
+        jMenuItem3.setText("Treinos Pré-definidos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -266,25 +291,28 @@ public class TelaMain extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem2.setText("Editar Treino");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Alunos");
-
-        jMenuItem4.setText("Alunos");
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/weightlifting_16px.png"))); // NOI18N
+        jMenuItem4.setText("Treino Aluno");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/info_16px.png"))); // NOI18N
+        jMenu3.setText("Opções");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/close_window_16px.png"))); // NOI18N
+        jMenuItem2.setText("Sair");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
 
@@ -316,45 +344,13 @@ public class TelaMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        TelaTreinos treino = new TelaTreinos();
-        treino.setVisible(true);
-        //chama a janela no Painel Desktop
-        
-        
-        try {   
-            treino.setSelected(true);   
-            //diz que a janela interna é maximizável   
-            treino.setMaximizable(true);   
-            //set o tamanho máximo dela, que depende da janela pai   
-            treino.setMaximum(true);   
-        } catch (java.beans.PropertyVetoException e) {} 
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        TelaCadastroTreino cadtreino = new TelaCadastroTreino();
+        TelaCadTreino cadtreino = new TelaCadTreino();
         cadtreino.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        TelaAlunos aluno = new TelaAlunos();
-        aluno.setVisible(true);
-        //chama a janela no Painel Desktop
-        
-        
-        try {   
-            aluno.setSelected(true);   
-            //diz que a janela interna é maximizável   
-            aluno.setMaximizable(true);   
-            //set o tamanho máximo dela, que depende da janela pai   
-            aluno.setMaximum(true);   
-        } catch (java.beans.PropertyVetoException e) {} 
-        
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void btnTreinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTreinosActionPerformed
-        TelaCadastroTreino cadtreino = new TelaCadastroTreino();
+        TelaCadTreino cadtreino = new TelaCadTreino();
         cadtreino.setVisible(true);
     }//GEN-LAST:event_btnTreinosActionPerformed
 
@@ -388,6 +384,54 @@ public class TelaMain extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jTbAlunoMouseClicked
+
+    private void btnTreinoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTreinoAlunoActionPerformed
+       if(jTbAluno.getSelectedRow() != -1){
+            // TODO add your handling code here:
+            idAluno = Integer.parseInt(jTxtIdAluno.getText());
+            nome = jTxtNomeAluno.getText();
+            preecamp = true;
+            
+            TelaTreinoAluno alunotreino = new TelaTreinoAluno();
+            alunotreino.setVisible(true);
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um aluno.");
+        }
+    }//GEN-LAST:event_btnTreinoAlunoActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if(jTbAluno.getSelectedRow() != -1){
+            // TODO add your handling code here:
+            idAluno = Integer.parseInt(jTxtIdAluno.getText());
+            nome = jTxtNomeAluno.getText();
+            preecamp = true;
+            
+            TelaTreinoAluno alunotreino = new TelaTreinoAluno();
+            alunotreino.setVisible(true);
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um aluno.");
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jBtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSairActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null,
+                "Tem certeza que deseja fechar ?",
+                "Atenção", JOptionPane.YES_NO_OPTION );
+        if (sair == JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jBtnSairActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null,
+                "Tem certeza que deseja fechar ?",
+                "Atenção", JOptionPane.YES_NO_OPTION );
+        if (sair == JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,6 +479,7 @@ public class TelaMain extends javax.swing.JFrame {
     private javax.swing.JButton btnTreinos;
     private javax.swing.JToggleButton jBtnConsultar;
     private javax.swing.JButton jBtnExercicios;
+    private javax.swing.JButton jBtnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenu jMenu1;
